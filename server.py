@@ -18,7 +18,6 @@ AWESOMENESS = [
 def start_here():
     """Home page."""
 
-
     return """<!doctype html>
     <html>Hi! This is the home page.
     <a href= "/hello"> "Click here" </a>
@@ -53,11 +52,10 @@ def say_hello():
 @app.route('/greet')
 def greet_person():
     """Get user by name."""
-
-    player = request.args.get("title", "person")
+    title = request.args.get("title")
+    player = request.args.get("person")
 
     compliment = choice(AWESOMENESS)
-    y = x
     
     return """
     <!doctype html>
@@ -66,13 +64,15 @@ def greet_person():
         <title>A Compliment</title>
       </head>
       <body>
-        Hi, {}! I think you're {}!
+        Hi, {title} {player}! I think you're {compliment}!
       </body>
     </html>
-    """.format(player, compliment)
+    """.format(title, player, compliment)
 
 
 if __name__ == '__main__':
     # debug=True gives us error messages in the browser and also "reloads"
     # our web app if we change the code.
     app.run(debug=True, host="0.0.0.0")
+
+
